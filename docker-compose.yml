@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile_flask
+    container_name: flask_container
+    expose:
+      - 8080
+    volumes:
+      - .:/application
+
+  mongodb:
+    image: mongo
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb:/data/db
+
+  rabbitmq:
+    image: rabbitmq
+    hostname: amqp
+    container_name: rabbitmq_container
+    ports:
+      - "5672:5672"
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile_celery
+    container_name: celery_container
+    depends_on:
+      - rabbitmq
+      - flask
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx
+    container_name: nginx_container
+    ports:
+      - "80:80"
