@@ -7,7 +7,9 @@ User register into the system with company name.
   - User can verify mail, setup password and login with their information.
   - This "Admin" user can add new users into their respective company assigning certain roles and each role has further permissions added to that role.
   - After addition of new user, that added new user can also verify their mail and also setup password then login. 
-  - "Admin" can create, update, delete roles as well as permissions to that role.
+  - "Admin" can create, update, delete roles as well as permissions to that role and again assign to users.
+  - "Admin" role can't be deleted.
+  - "Admin" user can add other user as admin.
   
 This project has:-
   - Flask as web framework.
